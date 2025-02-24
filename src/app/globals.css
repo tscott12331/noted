@@ -1,7 +1,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --col-text: #111111;
+  --middleground: #9f9f9f;
+  --col-text: var(--foreground);
 }
 
 * {
@@ -14,7 +15,8 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
-    --col-text: #cdcdcd;
+    --middleground: #9f9f9f;
+    --col-text: var(--foreground);
   }
 }
 

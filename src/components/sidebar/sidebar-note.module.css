@@ -1,0 +1,24 @@
+.sidebarNote {
+    width: 100%;
+    height: var(--sb-note-height);
+    border-bottom: 1px solid var(--middleground);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .2rem;
+}
+
+.sidebarNote > p {
+    width: 80%;
+    line-height: var(--sb-note-height);
+    overflow-x: hidden; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.delSymbol {
+    width: calc(.50 * var(--sb-note-height));
+    height: calc(.75 * var(--sb-note-height));
+    border: 1px solid var(--middleground);
+
+}
