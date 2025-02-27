@@ -1,0 +1,5 @@
+.sidebarAdd {
+    width: calc(.75 * var(--sb-con-height));
+    height: calc(.75 * var(--sb-con-height));
+    border: 1px solid var(--middleground);
+}

@@ -1,19 +1,10 @@
 import styles from './page.module.css';
 
-import SidebarNote from '@/components/sidebar/sidebar-note';
-import SidebarControls from '@/components/sidebar/sidebar-controls';
+import Sidebar from '@/components/sidebar/sidebar';
 export default function Page() {
     return (
         <div className={styles.notePage}>
-            <div className={styles.sidebar}>
-                <SidebarControls /> 
-                <SidebarNote />
-                <SidebarNote />
-                <SidebarNote />
-                <SidebarNote />
-                <SidebarNote />
-                <SidebarNote />
-            </div>
+            <Sidebar />
             <div className={styles.noteArea}>
                 <textarea className={styles.noteInput}></textarea>
             </div>

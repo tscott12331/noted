@@ -1,9 +1,23 @@
-import styles from './sidebar-note.module.css';
-export default function SidebarNote() {
+import SidebarNoteReg from './sidebar-note-reg';
+import SidebarNoteMin from './sidebar-note-min';
+export interface SidebarNoteProps {
+    title: string;
+    minimized: boolean;
+    handleRemove: (title: string) => void;
+}
+export default function SidebarNote({
+    title,
+    minimized,
+    handleRemove,
+}: SidebarNoteProps) {
     return (
-        <div className={styles.sidebarNote}>
-            <p>this is a note lul</p>
-            <div className={styles.delSymbol}></div>
-        </div>
+        minimized ? (
+        <SidebarNoteMin title={title} handleRemove={handleRemove}/>
+        )
+        : (
+        <SidebarNoteReg title={title} handleRemove={handleRemove}/>
+        )
     );
 }
+
+

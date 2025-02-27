@@ -1,0 +1,21 @@
+.sidebar {
+    width: 20%;
+
+}
+
+.min {
+    width: 2rem;
+}
+
+.sidebar, .min {
+    border-right: 1px solid var(--foreground);
+}
+
+.minAddWrapper {
+    width: 100%;
+    height: var(--sb-note-height);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

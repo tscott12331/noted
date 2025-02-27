@@ -1,0 +1,19 @@
+.sidebarNoteMin {
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: var(--sb-note-height);
+    border-bottom: 1px solid var(--middleground);
+    display: flex;
+    align-items: center;
+    padding: .2rem;
+}
+
+.delSymbolMin {
+    position: absolute;
+    top: .2rem;
+    right: .2rem;
+    width: 10%;
+    padding-bottom: 10%;
+    background-color: red;
+}
