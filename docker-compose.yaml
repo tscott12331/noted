@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres
+    container_name: noted-postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: buhster45
+    volumes:
+      - pgdata:/var/lib/postgresql/data 
+volumes:
+  pgdata:
+

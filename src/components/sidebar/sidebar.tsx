@@ -16,13 +16,13 @@ export default function Sidebar() {
         setMinimized(!minimized);
     }
 
-    const handleAdd = () => {
+    const handleAdd = async () => {
         const newNote = "this is a note lul";
         
         setNotes([...notes, newNote]);
     }
 
-    const handleRemove = (note) => {
+    const handleRemove = (note: string) => {
         let newNotes = [...notes];
         newNotes.splice(newNotes.indexOf(note), 1);
         setNotes([...newNotes]);
