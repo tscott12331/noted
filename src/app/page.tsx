@@ -7,8 +7,6 @@ import Sidebar from '@/components/sidebar/sidebar';
 import { db } from '@/lib/db';
 
 export default async function Page() {
-    const result = await db.execute('select 1');
-    console.log(result);
 
     return (
         <div className={styles.notePage}>
