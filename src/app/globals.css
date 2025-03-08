@@ -3,6 +3,7 @@
     --foreground: #171717;
     --middleground: #9f9f9f;
     --col-text: var(--foreground);
+    --col-link: #53a4ea;
 
     --sb-con-height: 2rem;
     --sb-note-height: 2rem;
@@ -45,8 +46,8 @@ body {
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+    color: var(--col-link);
+    text-decoration: underline;
 }
 
 @media (prefers-color-scheme: dark) {
