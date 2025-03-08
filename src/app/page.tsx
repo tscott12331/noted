@@ -4,10 +4,11 @@ import styles from './page.module.css';
 
 import Sidebar from '@/components/sidebar/sidebar';
 
-import { db } from '@/lib/db';
+import { register } from '@/lib/auth';
+import { verifyJWT } from '@/lib/jwt';
 
 export default async function Page() {
-
+    await register('buh', 'ster'); 
     return (
         <div className={styles.notePage}>
             <Sidebar />
