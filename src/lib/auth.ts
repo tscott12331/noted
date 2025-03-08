@@ -46,8 +46,35 @@ export const register = async (previousState: unknown, formData: FormData) => {
     
 }
 
-export const login = async (username: string, password: string) => {
+export const login = async (previousState: unknown, formData: FormData) => {
+    const username = formData.get('username') as string; 
+    const password = formData.get('password') as string; 
+
+    try {
+        const usersWithName = await db.select({
+            id: users.id,
+            hw: users.hw,
+        })
+        .from(users)
+        .where(eq(users.username, username));
+        
+        if(usersWithName.length === 0) return { error: "Invalid credentials" };
+        
+        const user = usersWithName[0];
+
+        const match = await bcrypt.compare(password, user.hw);
+
+        if(!match) return { error: "Invalid credentials" };
+
+        const token = await createSignedJWT(user.id);
+
+        (await cookies()).set('token', token);
+    } catch(err) {
+        console.error(err);
+        return { error: "Server error" };
+    }
     
+    redirect('/');
 }
 
 export const logout = async () => {
