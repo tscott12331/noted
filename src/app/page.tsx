@@ -8,7 +8,6 @@ import { register } from '@/lib/auth';
 import { verifyJWT } from '@/lib/jwt';
 
 export default async function Page() {
-    await register('buh', 'ster'); 
     return (
         <div className={styles.notePage}>
             <Sidebar />
