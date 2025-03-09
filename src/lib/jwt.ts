@@ -1,8 +1,8 @@
 import { jwtVerify, SignJWT, importPKCS8, importSPKI } from "jose";
 
 const alg = 'RS256'
-const pkcs8: string = process.env.PR_KEY;
-const spki: string = process.env.PU_KEY:
+const pkcs8: string = process.env.PR_KEY as string;
+const spki: string = process.env.PU_KEY as string;
 
 const pkey = await importPKCS8(pkcs8, alg);
 const pubkey = await importSPKI(spki, alg);
@@ -17,5 +17,10 @@ export const createSignedJWT = async (userId: number) => {
 }
 
 export const verifyJWT = async (jwt: string) => {
-    return await jwtVerify(jwt, pubkey);
+    try {
+        await jwtVerify(jwt, pubkey);
+        return true;
+    } catch(err) {
+        return false;
+    }
 }

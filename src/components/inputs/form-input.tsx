@@ -15,7 +15,7 @@ export default function FormInput({
     return (
         <div className={styles.formInput}>
             <label htmlFor={name}>{labelText}</label>
-            <input name={name} {...rest}/>
+            <input name={name} id={name} {...rest}/>
         </div>
     );
 }
