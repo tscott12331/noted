@@ -21,9 +21,18 @@ export default function Page() {
                     <h2>Create an Account</h2>
                 </div>
                 <div className={styles.formInputs}>
-                    <FormInput name="username" labelText="Username" />
-                    <FormInput name="password" labelText="Password" type="password" />
-                    <FormButton text="Create" />
+                    <FormInput 
+                    name="username" 
+                    labelText="Username" 
+                    required
+                    />
+                    <FormInput 
+                    name="password" 
+                    labelText="Password" 
+                    type="password" 
+                    required
+                    />
+                    <FormButton text="Create" error={data?.error}/>
                 </div>
                 <div className={styles.formFoot}>
                     <Link href="/login">Already have an account?</Link>

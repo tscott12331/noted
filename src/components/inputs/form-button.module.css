@@ -3,3 +3,7 @@
     height: 30px;
     border-radius: 15px; 
 }
+
+.error {
+    color: var(--col-err);
+}

@@ -4,6 +4,7 @@
     --middleground: #9f9f9f;
     --col-text: var(--foreground);
     --col-link: #53a4ea;
+    --col-err: #ca4344;
 
     --sb-con-height: 2rem;
     --sb-note-height: 2rem;
