@@ -21,7 +21,7 @@ export default function SidebarNoteMin({
                 <div 
                 className={styles.delSymbolMin}
                 onClick={() => handleRemove(title)}
-                ></div>}
+                >X</div>}
             
         </div>
     )

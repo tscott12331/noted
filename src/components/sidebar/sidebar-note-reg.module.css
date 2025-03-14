@@ -19,9 +19,30 @@
 .delSymbol {
     width: calc(.50 * var(--sb-note-height));
     height: calc(.75 * var(--sb-note-height));
-    border: 1px solid var(--middleground);
+    /*border: 1px solid var(--middleground);*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
 }
 
-.sidebarNote:hover > .delSymbol {
-    background-color: red;
+.delSymbol img {
+    filter: invert(0.7);
+    aspect-ratio:initial;
+    max-height: 95%;
+    max-width: 95%;
+    width: auto;
+    height: auto;
+}
+
+/*.delSymbol:hover img {*/
+/*}*/
+
+.sidebarNote:hover img {
+    filter: invert(1) contrast(1);
+}
+
+.sidebarNote img:hover {
+    filter: invert(1) contrast(1) drop-shadow(0 0 0.3rem var(--col-err));
+    cursor: pointer;
 }

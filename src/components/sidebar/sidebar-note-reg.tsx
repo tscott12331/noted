@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import styles from './sidebar-note-reg.module.css';
+import Image from 'next/image';
 
 export interface SidebarNoteRegProps {
     title: string;
@@ -19,7 +20,9 @@ export default function SidebarNoteReg({
             <div 
             className={styles.delSymbol}
             onClick={() => handleRemove(title)}
-            ></div>
+            >
+                <Image src='/trash-symbol.png' alt='X' width={1413} height={1920} />
+            </div>
         </div>
     )
 }

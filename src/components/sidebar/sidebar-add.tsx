@@ -8,6 +8,8 @@ export default function SidebarAdd({
     handleAdd,
 }: SidebarAddProps) {
     return (
-        <div className={styles.sidebarAdd} onClick={handleAdd}>p</div>
+        <div className={styles.sidebarAdd} onClick={handleAdd}>
+            <p>+</p>
+        </div>
     )
 }

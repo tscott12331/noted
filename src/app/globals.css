@@ -5,6 +5,7 @@
     --col-text: var(--foreground);
     --col-link: #53a4ea;
     --col-err: #ca4344;
+    --col-but-hov: #cccccc;
 
     --sb-con-height: 2rem;
     --sb-note-height: 2rem;
@@ -22,6 +23,7 @@
         --foreground: #ededed;
         --middleground: #9f9f9f;
         --col-text: var(--foreground);
+        --col-but-hov: #3a3a3a;
     }
 }
 

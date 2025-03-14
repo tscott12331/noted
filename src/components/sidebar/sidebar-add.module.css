@@ -1,5 +1,15 @@
 .sidebarAdd {
     width: calc(.75 * var(--sb-con-height));
     height: calc(.75 * var(--sb-con-height));
-    border: 1px solid var(--middleground);
+}
+
+.sidebarAdd:hover {
+    color: var(--col-but-hov);
+}
+
+.sidebarAdd p {
+    text-align: center;
+    line-height: calc(.75 * var(--sb-con-height));
+    cursor:pointer;
+    user-select: none;
 }
