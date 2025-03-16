@@ -6,6 +6,7 @@
     display: flex;
     align-items: center;
     padding: .2rem;
+    user-select: none;
 }
 
 .sidebarNote > p {

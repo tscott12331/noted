@@ -4,10 +4,12 @@ import styles from './sidebar-note-min.module.css';
 export interface SidebarNoteMinProps {
     title: string;
     handleRemove: (title: string) => void;
+    handleRename: (prevName: string, newName: string) => void;
 }
 export default function SidebarNoteMin({
     title,
     handleRemove,
+    handleRename
 }: SidebarNoteMinProps) {
     const [hovered, setHovered] = useState<boolean>(false);
 

@@ -17,7 +17,13 @@ export default function Sidebar() {
     }
 
     const handleAdd = async () => {
-        const newNote = "this is a note lul";
+        let newNote = "New Note";
+        let count = 0;
+        
+        while(notes.includes(newNote)) {
+            count++;
+            newNote = `New Note (${count})`;
+        }
         
         setNotes([...notes, newNote]);
     }
@@ -26,6 +32,18 @@ export default function Sidebar() {
         let newNotes = [...notes];
         newNotes.splice(newNotes.indexOf(note), 1);
         setNotes([...newNotes]);
+    }
+
+    const handleRename = (prevName: string, newName: string) => {
+        // tmp
+        let index = notes.indexOf(prevName);
+
+        if(index !== -1) {
+            let prevNotes = [...notes];
+            prevNotes[index] = newName;
+            setNotes([...prevNotes]);
+        }
+        
     }
     return (
             <div className={minimized ? styles.min : styles.sidebar}>
@@ -39,7 +57,9 @@ export default function Sidebar() {
                     handleRemove={handleRemove}
                     title={note} 
                     minimized={minimized} 
-                    key={i}/>
+                    key={i}
+                    handleRename={handleRename}
+                    />
                 )}
                 {minimized &&
                 <div className={styles.minAddWrapper}>
