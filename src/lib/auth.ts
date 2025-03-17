@@ -1,7 +1,7 @@
 "use server";
 
 import bcrypt from 'bcrypt';
-import { createSignedJWT, verifyJWT } from './jwt';
+import { createSignedJWT } from './jwt';
 import { cookies } from 'next/headers';
 import { eq } from 'drizzle-orm';
 import { db } from './db/db';
@@ -26,14 +26,12 @@ export const register = async (previousState: unknown, formData: FormData) => {
 
         const hw = await bcrypt.hash(password, 12);
     
-        const insertRes = await db.insert(users).values({
+        await db.insert(users).values({
             username,
             hw
-        }).returning({ id:  users.id});
+        });
 
-        const userId = insertRes[0]?.id;
-
-        const token = await createSignedJWT(userId);
+        const token = await createSignedJWT(username);
         
         (await cookies()).set('token', token);
 
@@ -52,7 +50,7 @@ export const login = async (previousState: unknown, formData: FormData) => {
 
     try {
         const usersWithName = await db.select({
-            id: users.id,
+            username: users.username,
             hw: users.hw,
         })
         .from(users)
@@ -66,7 +64,7 @@ export const login = async (previousState: unknown, formData: FormData) => {
 
         if(!match) return { error: "Invalid credentials" };
 
-        const token = await createSignedJWT(user.id);
+        const token = await createSignedJWT(user.username);
 
         (await cookies()).set('token', token);
     } catch(err) {

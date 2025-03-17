@@ -1,22 +1,24 @@
 "use client";
 
 import { useState } from 'react';
+import Cookies from 'js-cookie'
 
 import SidebarControls from './sidebar-controls';
 import SidebarNote from './sidebar-note';
 import SidebarAdd from './sidebar-add';
 
+import { addNote } from '@/lib/api/notes';
+
 import styles from './sidebar.module.css';
 
 export default function Sidebar() {
-    const [minimized, setMinimized] = useState<boolean>(false);
     const [notes, setNotes] = useState<Array<string>>([]);
-
-    const handleToggle = () => {
-        setMinimized(!minimized);
-    }
+    const [minimized, setMinimized] = useState<boolean>(false);
 
     const handleAdd = async () => {
+        let token = Cookies.get('token');
+        if(!token) return;
+
         let newNote = "New Note";
         let count = 0;
         
@@ -26,6 +28,7 @@ export default function Sidebar() {
         }
         
         setNotes([...notes, newNote]);
+        addNote(newNote, token);
     }
 
     const handleRemove = (note: string) => {
@@ -37,14 +40,20 @@ export default function Sidebar() {
     const handleRename = (prevName: string, newName: string) => {
         // tmp
         let index = notes.indexOf(prevName);
+        let taken = notes.includes(newName);
 
-        if(index !== -1) {
+        if(index !== -1 && !taken) {
             let prevNotes = [...notes];
             prevNotes[index] = newName;
             setNotes([...prevNotes]);
         }
         
     }
+
+    const handleToggle = () => {
+        setMinimized(!minimized);
+    }
+
     return (
             <div className={minimized ? styles.min : styles.sidebar}>
                 <SidebarControls 

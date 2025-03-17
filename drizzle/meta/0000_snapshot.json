@@ -1,5 +1,5 @@
 {
-  "id": "81f357ed-d0cc-4885-9513-9dd811c64d81",
+  "id": "4f536347-4696-46a1-91bd-3377aa433a28",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -8,38 +8,47 @@
       "name": "notes",
       "schema": "notes_schema",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "user_id": {
-          "name": "user_id",
-          "type": "integer",
+        "username": {
+          "name": "username",
+          "type": "varchar(256)",
           "primaryKey": false,
           "notNull": false
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "notes_user_id_users_id_fk": {
-          "name": "notes_user_id_users_id_fk",
+        "notes_username_users_username_fk": {
+          "name": "notes_username_users_username_fk",
           "tableFrom": "notes",
           "tableTo": "users",
           "schemaTo": "user_schema",
           "columnsFrom": [
-            "user_id"
+            "username"
           ],
           "columnsTo": [
-            "id"
+            "username"
           ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
+      "uniqueConstraints": {
+        "notes_username_title_unique": {
+          "name": "notes_username_title_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "username",
+            "title"
+          ]
+        }
+      },
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
@@ -48,16 +57,10 @@
       "name": "users",
       "schema": "user_schema",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
         "username": {
           "name": "username",
-          "type": "text",
-          "primaryKey": false,
+          "type": "varchar(256)",
+          "primaryKey": true,
           "notNull": true
         },
         "hw": {

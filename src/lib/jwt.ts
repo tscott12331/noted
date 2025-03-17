@@ -8,8 +8,8 @@ const pkey = await importPKCS8(pkcs8, alg);
 const pubkey = await importSPKI(spki, alg);
 
 
-export const createSignedJWT = async (userId: number) => {
-    return await new SignJWT({ userId })
+export const createSignedJWT = async (username: string) => {
+    return await new SignJWT({ username })
         .setProtectedHeader({ alg: 'RS256' })
         .setIssuedAt()
         .setExpirationTime('1h')
@@ -18,8 +18,7 @@ export const createSignedJWT = async (userId: number) => {
 
 export const verifyJWT = async (jwt: string) => {
     try {
-        await jwtVerify(jwt, pubkey);
-        return true;
+        return await jwtVerify(jwt, pubkey);
     } catch(err) {
         return false;
     }

@@ -1,5 +1,3 @@
-import { redirect } from "next/navigation";
-
 import { verifyJWT } from "@/lib/jwt";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
@@ -18,6 +16,8 @@ export async function middleware(req: NextRequest) {
             const validToken = await verifyJWT(token);
             if(!validToken) {
                 return notAuthRedirect(req);
+            } else {
+                return authRedirect(req);
             }
         } catch(err) {
             console.log(err);
@@ -25,6 +25,17 @@ export async function middleware(req: NextRequest) {
         }
     }
     
+}
+
+function authRedirect(req: NextRequest) {
+    if(req.nextUrl.pathname.startsWith('/login') ||
+        req.nextUrl.pathname.startsWith('/register')) {
+        const url = new URL('/', req.nextUrl.origin);
+        return NextResponse.redirect(url);
+    } else {
+        return NextResponse.next();
+    }
+
 }
 
 function notAuthRedirect(req: NextRequest) {

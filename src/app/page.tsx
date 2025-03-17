@@ -4,10 +4,8 @@ import styles from './page.module.css';
 
 import Sidebar from '@/components/sidebar/sidebar';
 
-import { register } from '@/lib/auth';
-import { verifyJWT } from '@/lib/jwt';
-
 export default async function Page() {
+    
     return (
         <div className={styles.notePage}>
             <Sidebar />

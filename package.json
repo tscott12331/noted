@@ -14,9 +14,11 @@
   },
   "dependencies": {
     "@next/env": "^15.2.1",
+    "@types/js-cookie": "^3.0.6",
     "bcrypt": "^5.1.1",
     "drizzle-orm": "^0.40.0",
     "jose": "^6.0.8",
+    "js-cookie": "^3.0.5",
     "next": "15.1.7",
     "postgres": "^3.4.5",
     "react": "^19.0.0",
