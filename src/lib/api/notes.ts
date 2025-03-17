@@ -32,7 +32,7 @@ export async function getNotes(token: string): Promise<Array<Note>> {
 export async function addNote(title: string, token: string) {
     try {
         const user = await verifyJWT(token);
-        if(!user) {
+        if(!user || !title) {
             return;
         }
 
@@ -55,10 +55,27 @@ export async function addNote(title: string, token: string) {
 }
 
 
-export async function changeNote(title: string, username: string) {
+export async function changeNote(title: string, token: string) {
      
 }
 
-export async function deleteNote(title: string, username: string) {
+export async function deleteNote(title: string, token: string): Promise<boolean> {
+    const user = await verifyJWT(token);
+    if(!user || !title) {
+        return false;
+    }
+   
+    try {
+        await fetch(`${API_URL}/api/note?username=${user.payload.username}&title=${title}`, {
+            method: "DELETE",
+            headers: {
+                "Cookie": `token=${token}`
+            }
+        })
+        return true;
+    } catch(err) {
+        console.error(err);
+        return false;
+    }
 
 }

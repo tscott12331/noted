@@ -1,6 +1,6 @@
 import { db } from "@/lib/db/db";
 import { notes } from "@/lib/db/schemas/notes";
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import { NextResponse, NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -44,6 +44,18 @@ export function PATCH(req: NextRequest) {
     return Response.json('hello world');
 }
 
-export function DELETE(req: NextRequest) {
-    return Response.json('hello world');
+export async function DELETE(req: NextRequest) {
+    const username = req.nextUrl.searchParams.get('username');
+    const title = req.nextUrl.searchParams.get('title');
+    if(!username || !title) {
+        return NextResponse.error();
+    }
+    
+    try {                                                        
+        await db.delete(notes).where(and(eq(notes.username, username), eq(notes.title, title)));
+        return NextResponse.json({}, { status: 200 });
+    } catch(err) {
+        console.error(err);
+        return NextResponse.error();
+    }
 }
