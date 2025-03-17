@@ -4,11 +4,35 @@ const API_URL: string = process.env.URL as string;
 
 import { verifyJWT } from "../jwt";
 
+export type Note = {
+    username: string;
+    title: string;
+}
+
+export async function getNotes(token: string): Promise<Array<Note>> {
+    try {
+        const user = await verifyJWT(token);
+        if(!user) {
+            return [];
+        }
+
+        const res = await fetch(`${API_URL}/api/note?username=${user.payload.username}`, {
+            headers: {
+                "Cookie": `token=${token}`
+            }
+        })
+
+        return await res.json();
+    } catch(err) {
+        console.error(err);
+        return [];
+    }
+}
+
 export async function addNote(title: string, token: string) {
     try {
-        let user = await verifyJWT(token);
+        const user = await verifyJWT(token);
         if(!user) {
-            console.log('not user');
             return;
         }
 

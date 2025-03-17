@@ -1,19 +1,33 @@
 "use client";
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie'
 
 import SidebarControls from './sidebar-controls';
 import SidebarNote from './sidebar-note';
 import SidebarAdd from './sidebar-add';
 
-import { addNote } from '@/lib/api/notes';
+import { addNote, getNotes } from '@/lib/api/notes';
+import { Note } from '@/lib/api/notes';
 
 import styles from './sidebar.module.css';
 
 export default function Sidebar() {
     const [notes, setNotes] = useState<Array<string>>([]);
     const [minimized, setMinimized] = useState<boolean>(false);
+
+    useEffect(() => {
+        initSidebar(); 
+    }, [])
+
+    const initSidebar = async () => {
+        const token = Cookies.get('token');
+        if(!token) return;
+
+        const userNotes: Array<Note> = await getNotes(token);
+         
+        setNotes([...userNotes.map((n) => n.title)]);
+    }
 
     const handleAdd = async () => {
         let token = Cookies.get('token');
