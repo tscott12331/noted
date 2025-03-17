@@ -40,8 +40,19 @@ export async function POST(req: NextRequest) {
     }
 }
 
-export function PATCH(req: NextRequest) {
-    return Response.json('hello world');
+export async function PATCH(req: NextRequest) {
+    const { username, prevTitle, newTitle } = await req.json();
+    if(!username || !prevTitle || !newTitle) {
+        return NextResponse.error();
+    }
+
+    try {
+        await db.update(notes).set({ title: newTitle}).where(eq(notes.title, prevTitle));
+        return NextResponse.json({}, { status: 200 });
+    } catch(err) {
+        console.error(err);
+        return NextResponse.error();
+    }
 }
 
 export async function DELETE(req: NextRequest) {

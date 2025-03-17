@@ -7,7 +7,7 @@ import SidebarControls from './sidebar-controls';
 import SidebarNote from './sidebar-note';
 import SidebarAdd from './sidebar-add';
 
-import { addNote, deleteNote, getNotes } from '@/lib/api/notes';
+import { addNote, changeNote, deleteNote, getNotes } from '@/lib/api/notes';
 import { Note } from '@/lib/api/notes';
 
 import styles from './sidebar.module.css';
@@ -57,15 +57,21 @@ export default function Sidebar() {
         setNotes([...newNotes]);
     }
 
-    const handleRename = (prevName: string, newName: string) => {
+    const handleRename = async (prevName: string, newName: string) => {
         // tmp
+        let token = Cookies.get('token');
+        if(!token) return;
+
         let index = notes.indexOf(prevName);
         let taken = notes.includes(newName);
 
         if(index !== -1 && !taken) {
-            let prevNotes = [...notes];
-            prevNotes[index] = newName;
-            setNotes([...prevNotes]);
+            const changed = await changeNote(prevName, newName, token);
+            if(changed) {
+                let prevNotes = [...notes];
+                prevNotes[index] = newName;
+                setNotes([...prevNotes]);
+            }
         }
         
     }

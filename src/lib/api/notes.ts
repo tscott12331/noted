@@ -55,8 +55,32 @@ export async function addNote(title: string, token: string) {
 }
 
 
-export async function changeNote(title: string, token: string) {
-     
+export async function changeNote(prevTitle: string, newTitle: string, token: string): Promise<boolean> {
+    const user = await verifyJWT(token);
+    if(!user || !newTitle || !prevTitle) {
+        return false;
+    }
+
+    try {
+        let res = await fetch(`${API_URL}/api/note`, {
+            method: "PATCH",
+            body: JSON.stringify({
+                prevTitle,
+                newTitle,
+                username: user.payload.username
+            }),
+            headers: {
+                "Content-Type": "application/json",
+                "Cookie": `token=${token}`
+            }
+        })
+        
+        return res.status === 200; 
+    } catch(err) {
+        console.error(err);
+        return false;
+    }
+
 }
 
 export async function deleteNote(title: string, token: string): Promise<boolean> {
@@ -66,13 +90,13 @@ export async function deleteNote(title: string, token: string): Promise<boolean>
     }
    
     try {
-        await fetch(`${API_URL}/api/note?username=${user.payload.username}&title=${title}`, {
+        let res = await fetch(`${API_URL}/api/note?username=${user.payload.username}&title=${title}`, {
             method: "DELETE",
             headers: {
                 "Cookie": `token=${token}`
             }
         })
-        return true;
+        return res.status === 200;
     } catch(err) {
         console.error(err);
         return false;
