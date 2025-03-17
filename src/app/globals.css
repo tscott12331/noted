@@ -3,6 +3,7 @@
     --foreground: #171717;
     --middleground: #9f9f9f;
     --col-text: var(--foreground);
+    --col-text-edit: #3366aa;
     --col-link: #53a4ea;
     --col-err: #ca4344;
     --col-but-hov: #cccccc;

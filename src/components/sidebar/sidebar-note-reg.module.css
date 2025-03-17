@@ -9,18 +9,27 @@
     user-select: none;
 }
 
-.sidebarNote > p {
+.sidebarNote > p, .sidebarNote > input {
     width: 80%;
+}
+
+.sidebarNote > p {
     line-height: var(--sb-note-height);
     overflow-x: hidden; 
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
+.sidebarNote > input {
+    font: inherit;
+    background: var(--col-text-edit);
+    outline: 2px dashed var(--middleground);
+    border: none;
+}
+
 .delSymbol {
     width: calc(.50 * var(--sb-note-height));
     height: calc(.75 * var(--sb-note-height));
-    /*border: 1px solid var(--middleground);*/
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,9 +44,6 @@
     width: auto;
     height: auto;
 }
-
-/*.delSymbol:hover img {*/
-/*}*/
 
 .sidebarNote:hover img {
     filter: invert(1) contrast(1);
