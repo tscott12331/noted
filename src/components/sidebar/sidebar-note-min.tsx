@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import styles from './sidebar-note-min.module.css';
 
 export interface SidebarNoteMinProps {
@@ -12,19 +12,53 @@ export default function SidebarNoteMin({
     handleRename
 }: SidebarNoteMinProps) {
     const [hovered, setHovered] = useState<boolean>(false);
+    const [renaming, setRenaming] = useState<boolean>(false);
+    const renameInput = useRef(null);
+
+    useEffect(() => {
+        if(renaming && renameInput) {
+            renameInput.current?.focus();
+        }
+    }, [renaming])
+
+    const handleDoubleClick = () => {
+        console.log('doubleclick');
+        setRenaming(true);
+    }
+
+    const handleKeyDown = (e) => { 
+        if(e.key === "Enter" && renameInput?.current) {
+            renameInput.current.blur();
+            handleRename(title, renameInput.current.value);
+        }
+    }
 
     return (
+        <>
         <div className={styles.sidebarNoteMin}
         onMouseOver={() => setHovered(true)}
         onMouseOut={() => setHovered(false)}
         >
-            <p>{title.slice(0, 3)}</p>
+            <p
+            onDoubleClick={handleDoubleClick}
+            >{title.slice(0, 3)}</p>
             {hovered && 
                 <div 
                 className={styles.delSymbolMin}
                 onClick={() => handleRemove(title)}
-                >X</div>}
-            
+                >X</div>
+            }
         </div>
+        {renaming &&
+            <div className={styles.renamePopupWrapper}>
+                <input 
+                defaultValue={title}
+                ref={renameInput}
+                onKeyDown={handleKeyDown}
+                onBlur={() => setRenaming(false)}
+                /> 
+            </div>
+        } 
+        </>
     )
 }

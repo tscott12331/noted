@@ -12,6 +12,22 @@
     font-size: .7rem;
 }
 
+.renamePopupWrapper {
+    position: absolute;
+    left: .2rem;
+    width: 7rem;
+}
+
+.renamePopupWrapper input {
+    position: relative;
+    top: calc(-1 * var(--sb-note-height) + .3rem);
+    font-size: .7rem;
+    outline: 2px dashed var(--foreground);
+    border: none;
+    background: var(--col-text-edit);
+    color: inherit;
+}
+
 .delSymbolMin {
     position: absolute;
     top: .1rem;

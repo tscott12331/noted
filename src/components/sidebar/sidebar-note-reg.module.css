@@ -23,7 +23,7 @@
 .sidebarNote > input {
     font: inherit;
     background: var(--col-text-edit);
-    outline: 2px dashed var(--middleground);
+    outline: 2px dashed var(--foreground);
     border: none;
 }
 
