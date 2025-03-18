@@ -1,6 +1,18 @@
 .sidebar {
     width: 20%;
+}
 
+.notesWrapperMin, .notesWrapperReg {
+    overflow: overlay;
+    overflow-x: hidden;
+}
+
+.notesWrapperMin {
+    height: calc(100% - var(--sb-con-height) - var(--sb-note-height));
+}
+ 
+.notesWrapperReg {
+    height: calc(100% - var(--sb-con-height));
 }
 
 .min {
@@ -18,4 +30,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    border-bottom: 1px solid var(--middleground);
 }

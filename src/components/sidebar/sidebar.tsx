@@ -87,20 +87,23 @@ export default function Sidebar() {
                 handleAdd={handleAdd}
                 minimized={minimized}
                 /> 
-                {notes.map((note, i) => 
-                    <SidebarNote 
-                    handleRemove={handleRemove}
-                    title={note} 
-                    minimized={minimized} 
-                    key={i}
-                    handleRename={handleRename}
-                    />
-                )}
                 {minimized &&
                 <div className={styles.minAddWrapper}>
                     <SidebarAdd handleAdd={handleAdd}/>
                 </div>
                 } 
+                <div className={minimized ? styles.notesWrapperMin
+                    : styles.notesWrapperReg}>
+                    {notes.map((note, i) => 
+                        <SidebarNote 
+                        handleRemove={handleRemove}
+                        title={note} 
+                        minimized={minimized} 
+                        key={i}
+                        handleRename={handleRename}
+                        />
+                    )}
+                </div>
             </div>
     )
 }

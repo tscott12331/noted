@@ -8,6 +8,8 @@
     align-items: center;
     padding: .2rem;
     user-select: none;
+
+    font-size: .7rem;
 }
 
 .delSymbolMin {

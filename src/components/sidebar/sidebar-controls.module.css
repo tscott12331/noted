@@ -1,12 +1,19 @@
-.sidebarControls {
+.sidebarControlsReg, .sidebarControlsMin {
     width: 100%;
     height: var(--sb-con-height);
     display: flex;
-    padding: 0 .2rem;
+    padding: 0 .25rem;
 
     align-items: center;
-    gap: .2rem;
 
     border-bottom: 1px solid var(--foreground);
 }
 
+.sidebarControlsReg {
+    gap: .2rem;
+}
+
+.sidebarControlsMin {
+    padding: 0 .2rem;
+    justify-content: center;
+}

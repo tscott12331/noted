@@ -13,7 +13,8 @@ export default function SidebarControls({
     minimized,
 }: SidebarControlsProps) {
     return (
-        <div className={styles.sidebarControls}>
+        <div className={minimized ? styles.sidebarControlsMin
+                        : styles.sidebarControlsReg}>
             <SidebarToggle handleToggle={handleToggle}/>
             {!minimized &&
                 <SidebarAdd handleAdd={handleAdd} />
