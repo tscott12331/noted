@@ -7,7 +7,7 @@ export const notes = notesSchema.table('notes', {
     username: varchar('username', { length: 256 })
             .references(() => users.username),
     title: varchar('title', { length: 256 }).notNull(),
-            // need buffer
+    buffer: varchar('buffer').default(""),
 }, (t) => [
     unique().on(t.username, t.title)
 ])

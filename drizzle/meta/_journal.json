@@ -8,6 +8,20 @@
       "when": 1742184432472,
       "tag": "0000_sturdy_rocket_raccoon",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1742352819415,
+      "tag": "0001_jittery_tinkerer",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1742353031459,
+      "tag": "0002_amusing_nick_fury",
+      "breakpoints": true
     }
   ]
 }

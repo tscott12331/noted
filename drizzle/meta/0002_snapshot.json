@@ -1,0 +1,103 @@
+{
+  "id": "9c9b9b60-fd8b-48a3-9fd6-50f7289deeeb",
+  "prevId": "37c2bca4-ac5e-4717-bbe5-bf159d5a8472",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "notes_schema.notes": {
+      "name": "notes",
+      "schema": "notes_schema",
+      "columns": {
+        "username": {
+          "name": "username",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "buffer": {
+          "name": "buffer",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "''"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "notes_username_users_username_fk": {
+          "name": "notes_username_users_username_fk",
+          "tableFrom": "notes",
+          "tableTo": "users",
+          "schemaTo": "user_schema",
+          "columnsFrom": [
+            "username"
+          ],
+          "columnsTo": [
+            "username"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "notes_username_title_unique": {
+          "name": "notes_username_title_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "username",
+            "title"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "user_schema.users": {
+      "name": "users",
+      "schema": "user_schema",
+      "columns": {
+        "username": {
+          "name": "username",
+          "type": "varchar(256)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "hw": {
+          "name": "hw",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {
+    "notes_schema": "notes_schema",
+    "user_schema": "user_schema"
+  },
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

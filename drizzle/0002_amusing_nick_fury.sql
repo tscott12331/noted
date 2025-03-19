@@ -1,0 +1,1 @@
+ALTER TABLE "notes_schema"."notes" ALTER COLUMN "buffer" SET DEFAULT '';

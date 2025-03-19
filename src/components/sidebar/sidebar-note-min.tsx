@@ -22,7 +22,6 @@ export default function SidebarNoteMin({
     }, [renaming])
 
     const handleDoubleClick = () => {
-        console.log('doubleclick');
         setRenaming(true);
     }
 

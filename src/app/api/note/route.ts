@@ -10,7 +10,9 @@ export async function GET(req: NextRequest) {
     }
 
     try {
-        const userNotes = await db.select()
+        const userNotes = await db.select({
+                            title: notes.title,
+                        })
                         .from(notes)
                         .where(eq(notes.username, username));
         return NextResponse.json(userNotes);
