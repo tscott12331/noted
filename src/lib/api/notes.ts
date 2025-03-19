@@ -29,6 +29,55 @@ export async function getNotes(token: string): Promise<Array<Note>> {
     }
 }
 
+export async function getNoteBuffer(title: string, token: string): Promise<any> {
+    try {
+        const user = await verifyJWT(token);
+        if(!user) {
+            return { error: true }
+        }
+
+        const res = await fetch(`${API_URL}/api/note/buffer?username=${user.payload.username}&title=${title}`, {
+            headers: {
+                "Cookie": `token=${token}`
+            }
+        })
+
+        return await res.json();
+    } catch(err) {
+        console.error(err);
+        return { error: true };
+    }
+}
+
+export async function updateNoteBuffer(title: string, buffer: string, token: string): Promise<any> {
+    try {
+        const user = await verifyJWT(token);
+        if(!user) {
+            return { error: true };
+        }
+
+        const username = user.payload.username;
+
+        const res = await fetch(`${API_URL}/api/note/buffer`, {
+            method: "PATCH",
+            body: JSON.stringify({
+                username,
+                title,
+                buffer,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+                "Cookie": `token=${token}`
+            }
+        })
+
+        return await res.json();
+    } catch(err) {
+        console.error(err);
+        return { error: true };
+    }
+}
+
 export async function addNote(title: string, token: string) {
     try {
         const user = await verifyJWT(token);
