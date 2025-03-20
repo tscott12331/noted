@@ -16,6 +16,8 @@ export default function Page() {
     const [curBuff, setCurBuff] = useState<string>("");
     const [notes, setNotes] = useState<Array<string>>([]);
     const [curNote, setCurNote] = useState<string>("");
+    const [prevNote, setPrevNote] = useState<string>("");
+    const [hasChanges, setHasChanges] = useState<boolean>(false);
     
     useEffect(() => {
         initSidebar(); 
@@ -23,24 +25,35 @@ export default function Page() {
 
 
     useEffect(() => {
+        if(hasChanges) {
+            saveNote(prevNote, curBuff);
+        }
+        setHasChanges(false);
         getBuffer(); 
     }, [curNote]);
 
     useEffect(() => {
-        const timeout = setTimeout(async () => {
-            const token = Cookies.get('token');
-            if(!token) return;
+        if(hasChanges) {
+            const timeout = setTimeout(() => {
+                saveNote(curNote, curBuff);
+            }, 5000);
 
-            const res = await updateNoteBuffer(curNote, curBuff, token);
-            if(res.error) {
-                console.log('Error saving note');
-            } else if(res.success) {
-                console.log('Saved note');
-            }
-        }, 5000);
-
-        return () => clearTimeout(timeout);
+            return () => clearTimeout(timeout);
+        }
     }, [curBuff])
+
+    const saveNote = async (title: string, buff: string) => {
+        if(title.length === 0) return;
+        const token = Cookies.get('token');
+        if(!token) return;
+
+        const res = await updateNoteBuffer(title, buff, token);
+        if(res.error) {
+            console.log('Error saving note');
+        } else if(res.success) {
+            console.log('Saved note');
+        }
+    }
 
     const getBuffer = async () => {
         const token = Cookies.get('token');
@@ -74,10 +87,18 @@ export default function Page() {
 
     return (
         <div className={styles.notePage}>
-            <Sidebar notes={notes} setNotes={setNotes} curNote={curNote} setCurNote={setCurNote} />
+            <Sidebar 
+            notes={notes} 
+            setNotes={setNotes} 
+            curNote={curNote} 
+            setCurNote={setCurNote} 
+            prevNote={prevNote}
+            setPrevNote={setPrevNote}
+            />
             <NoteArea 
             curBuff={curBuff}
             changeBuff={updateBuffer}
+            setHasChanges={setHasChanges}
             />
         </div> 
     )

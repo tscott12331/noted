@@ -6,7 +6,6 @@ import SidebarNote from './sidebar-note';
 import SidebarAdd from './sidebar-add';
 
 import { addNote, changeNote, deleteNote, getNotes } from '@/lib/api/notes';
-import { Note } from '@/lib/api/notes';
 
 import styles from './sidebar.module.css';
 
@@ -15,6 +14,8 @@ export interface SidebarProps {
     setNotes: Dispatch<SetStateAction<string[]>>
     curNote: string;
     setCurNote: Dispatch<SetStateAction<string>> 
+    prevNote: string;
+    setPrevNote: Dispatch<SetStateAction<string>> 
 }
 
 export default function Sidebar({
@@ -22,6 +23,8 @@ export default function Sidebar({
     setNotes,
     curNote,
     setCurNote,
+    prevNote,
+    setPrevNote,
 }: SidebarProps) {
     const [minimized, setMinimized] = useState<boolean>(false);
 
@@ -76,6 +79,11 @@ export default function Sidebar({
         setMinimized(!minimized);
     }
 
+    const handleSelect = (title: string) => {
+        setPrevNote(curNote);
+        setCurNote(title);
+    }
+
     return (
             <div className={minimized ? styles.min : styles.sidebar}>
                 <SidebarControls 
@@ -98,7 +106,7 @@ export default function Sidebar({
                         selected={curNote === note}
                         key={i}
                         handleRename={handleRename}
-                        handleSelect={setCurNote}
+                        handleSelect={handleSelect}
                         />
                     )}
                 </div>

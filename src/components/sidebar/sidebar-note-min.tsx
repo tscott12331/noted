@@ -6,7 +6,7 @@ export interface SidebarNoteMinProps {
     handleRemove: (title: string) => void;
     handleRename: (prevName: string, newName: string) => void;
     selected: boolean;
-    handleSelect: Dispatch<SetStateAction<string>>;
+    handleSelect: (title: string) => void;
 }
 
 export default function SidebarNoteMin({

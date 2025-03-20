@@ -1,6 +1,6 @@
 import SidebarNoteReg from './sidebar-note-reg';
 import SidebarNoteMin from './sidebar-note-min';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 export interface SidebarNoteProps {
     title: string;
     minimized: boolean;
