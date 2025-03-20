@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
                                                          { status: 404 });
         
         return NextResponse.json({ success: true,
-                                   buffer: buffer[0],
+                                   buffer: buffer[0].buffer,
                                  },
                                  { status: 200 });
     } catch(err) {

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import styles from './sidebar-note-reg.module.css';
 import Image from 'next/image';
 
@@ -6,11 +6,15 @@ export interface SidebarNoteRegProps {
     title: string;
     handleRemove: (title: string) => void;
     handleRename: (prevName: string, newName: string) => void;
+    selected: boolean;
+    handleSelect: Dispatch<SetStateAction<string>>;
 }
 export default function SidebarNoteReg({
     title,
     handleRemove,
     handleRename,
+    selected,
+    handleSelect,
 }: SidebarNoteRegProps) {
     const [renaming, setRenaming] = useState<boolean>(false);
     const renameInput = useRef(null);
@@ -33,7 +37,10 @@ export default function SidebarNoteReg({
     }
 
     return (
-        <div className={styles.sidebarNote}>
+        <div 
+        className={selected ? styles.sidebarNoteSel : styles.sidebarNote}
+        onClick={() => handleSelect(title)}
+        >
             {renaming ?
                 <input 
                     ref={renameInput}

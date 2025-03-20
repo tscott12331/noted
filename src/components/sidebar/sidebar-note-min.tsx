@@ -1,15 +1,20 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, Dispatch, SetStateAction } from 'react';
 import styles from './sidebar-note-min.module.css';
 
 export interface SidebarNoteMinProps {
     title: string;
     handleRemove: (title: string) => void;
     handleRename: (prevName: string, newName: string) => void;
+    selected: boolean;
+    handleSelect: Dispatch<SetStateAction<string>>;
 }
+
 export default function SidebarNoteMin({
     title,
     handleRemove,
-    handleRename
+    handleRename,
+    selected,
+    handleSelect,
 }: SidebarNoteMinProps) {
     const [hovered, setHovered] = useState<boolean>(false);
     const [renaming, setRenaming] = useState<boolean>(false);
@@ -34,9 +39,10 @@ export default function SidebarNoteMin({
 
     return (
         <>
-        <div className={styles.sidebarNoteMin}
+        <div className={selected ? styles.sidbarNoteMinSel : styles.sidebarNoteMin}
         onMouseOver={() => setHovered(true)}
         onMouseOut={() => setHovered(false)}
+        onClick={() => handleSelect(title)}
         >
             <p
             onDoubleClick={handleDoubleClick}

@@ -2,11 +2,14 @@
     --background: #ffffff;
     --foreground: #171717;
     --middleground: #9f9f9f;
+
     --col-text: var(--foreground);
     --col-text-edit: #3366aa;
     --col-link: #53a4ea;
     --col-err: #ca4344;
     --col-but-hov: #cccccc;
+
+    --col-note-sel: #444444;
 
     --sb-con-height: 2rem;
     --sb-note-height: 2rem;

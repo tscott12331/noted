@@ -1,4 +1,4 @@
-.sidebarNote {
+.sidebarNote, .sidebarNoteSel {
     justify-content: space-between;
     width: 100%;
     height: var(--sb-note-height);
@@ -7,6 +7,10 @@
     align-items: center;
     padding: .2rem;
     user-select: none;
+}
+
+.sidebarNoteSel {
+    background: var(--col-note-sel);
 }
 
 .sidebarNote > p, .sidebarNote > input {

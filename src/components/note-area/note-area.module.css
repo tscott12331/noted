@@ -1,0 +1,18 @@
+.noteArea {
+    padding: 0.6rem;
+    flex-grow: 1;
+}
+
+.noteInput {
+    outline: none;
+    border: none;
+    resize: none;
+    
+    color: inherit;
+    background: none;
+
+    width: 100%;
+    height: 100%;
+
+    font-size: 1.2rem;
+}

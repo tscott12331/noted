@@ -1,4 +1,4 @@
-.sidebarNoteMin {
+.sidebarNoteMin, .sidebarNoteMinSel {
     justify-content: center;
     position: relative;
     width: 100%;
@@ -10,6 +10,10 @@
     user-select: none;
 
     font-size: .7rem;
+}
+
+.sidebarNoteMinSel {
+    background: var(--col-note-sel);
 }
 
 .renamePopupWrapper {

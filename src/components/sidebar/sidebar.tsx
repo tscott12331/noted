@@ -1,6 +1,4 @@
-"use client";
-
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Cookies from 'js-cookie'
 
 import SidebarControls from './sidebar-controls';
@@ -12,22 +10,20 @@ import { Note } from '@/lib/api/notes';
 
 import styles from './sidebar.module.css';
 
-export default function Sidebar() {
-    const [notes, setNotes] = useState<Array<string>>([]);
+export interface SidebarProps {
+    notes: Array<string>;
+    setNotes: Dispatch<SetStateAction<string[]>>
+    curNote: string;
+    setCurNote: Dispatch<SetStateAction<string>> 
+}
+
+export default function Sidebar({
+    notes,
+    setNotes,
+    curNote,
+    setCurNote,
+}: SidebarProps) {
     const [minimized, setMinimized] = useState<boolean>(false);
-
-    useEffect(() => {
-        initSidebar(); 
-    }, [])
-
-    const initSidebar = async () => {
-        const token = Cookies.get('token');
-        if(!token) return;
-
-        const userNotes: Array<Note> = await getNotes(token);
-         
-        setNotes([...userNotes.map((n) => n.title)]);
-    }
 
     const handleAdd = async () => {
         let token = Cookies.get('token');
@@ -99,8 +95,10 @@ export default function Sidebar() {
                         handleRemove={handleRemove}
                         title={note} 
                         minimized={minimized} 
+                        selected={curNote === note}
                         key={i}
                         handleRename={handleRename}
+                        handleSelect={setCurNote}
                         />
                     )}
                 </div>

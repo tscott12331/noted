@@ -29,7 +29,13 @@ export async function getNotes(token: string): Promise<Array<Note>> {
     }
 }
 
-export async function getNoteBuffer(title: string, token: string): Promise<any> {
+export type NoteBufferRes = {
+    error?: boolean;
+    success?: boolean;
+    buffer?: string;
+}
+
+export async function getNoteBuffer(title: string, token: string): Promise<NoteBufferRes> {
     try {
         const user = await verifyJWT(token);
         if(!user) {
@@ -49,7 +55,12 @@ export async function getNoteBuffer(title: string, token: string): Promise<any> 
     }
 }
 
-export async function updateNoteBuffer(title: string, buffer: string, token: string): Promise<any> {
+export interface NoteBufferUpdateRes {
+    success?: boolean;
+    error?: boolean;
+}
+
+export async function updateNoteBuffer(title: string, buffer: string, token: string): Promise<NoteBufferUpdateRes> {
     try {
         const user = await verifyJWT(token);
         if(!user) {
