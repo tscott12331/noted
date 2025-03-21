@@ -91,8 +91,8 @@ export default function Page() {
             notes={notes} 
             setNotes={setNotes} 
             curNote={curNote} 
-            setCurNote={setCurNote} 
             prevNote={prevNote}
+            setCurNote={setCurNote} 
             setPrevNote={setPrevNote}
             />
             <NoteArea 

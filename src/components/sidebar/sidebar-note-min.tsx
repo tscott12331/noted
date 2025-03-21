@@ -37,6 +37,11 @@ export default function SidebarNoteMin({
         }
     }
 
+    const handleClick = (e) => {
+        e.stopPropagation();
+        handleRemove(title);
+    }
+
     return (
         <>
         <div className={selected ? styles.sidebarNoteMinSel : styles.sidebarNoteMin}
@@ -50,7 +55,7 @@ export default function SidebarNoteMin({
             {hovered && 
                 <div 
                 className={styles.delSymbolMin}
-                onClick={() => handleRemove(title)}
+                onClick={handleClick}
                 >X</div>
             }
         </div>

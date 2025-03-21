@@ -13,8 +13,8 @@ export interface SidebarProps {
     notes: Array<string>;
     setNotes: Dispatch<SetStateAction<string[]>>
     curNote: string;
-    setCurNote: Dispatch<SetStateAction<string>> 
     prevNote: string;
+    setCurNote: Dispatch<SetStateAction<string>> 
     setPrevNote: Dispatch<SetStateAction<string>> 
 }
 
@@ -22,8 +22,8 @@ export default function Sidebar({
     notes,
     setNotes,
     curNote,
-    setCurNote,
     prevNote,
+    setCurNote,
     setPrevNote,
 }: SidebarProps) {
     const [minimized, setMinimized] = useState<boolean>(false);
@@ -54,10 +54,23 @@ export default function Sidebar({
         let newNotes = [...notes];
         newNotes.splice(newNotes.indexOf(note), 1);
         setNotes([...newNotes]);
+
+        if(note === curNote) {
+            const includesPrev = newNotes.includes(prevNote);
+            if(!includesPrev) {
+                const n = newNotes[0] ? newNotes[0] : "";
+                setCurNote(n);
+                setPrevNote(n);
+            } else {
+                setCurNote(prevNote);
+            }
+        } else if(note === prevNote) {
+            //setCurNote(curNote);
+            setPrevNote(curNote); 
+        }
     }
 
     const handleRename = async (prevName: string, newName: string) => {
-        // tmp
         let token = Cookies.get('token');
         if(!token) return;
 

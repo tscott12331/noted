@@ -36,6 +36,11 @@ export default function SidebarNoteReg({
         }
     }
 
+    const handleClick = (e) => {
+        e.stopPropagation();
+        handleRemove(title)
+    }
+
     return (
         <div 
         className={selected ? styles.sidebarNoteSel : styles.sidebarNote}
@@ -49,11 +54,13 @@ export default function SidebarNoteReg({
                     onKeyDown={handleKeyDown}
                 />
             :
-                <p onDoubleClick={handleDoubleClick}>{title}</p>
+                <p 
+            onDoubleClick={handleDoubleClick}
+            >{title}</p>
             }
             <div 
             className={styles.delSymbol}
-            onClick={() => handleRemove(title)}
+            onClick={handleClick}
             >
                 <Image src='/trash-symbol.png' alt='X' width={1413} height={1920} />
             </div>

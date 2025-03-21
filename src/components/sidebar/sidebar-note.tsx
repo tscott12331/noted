@@ -7,7 +7,7 @@ export interface SidebarNoteProps {
     selected: boolean;
     handleRemove: (title: string) => void;
     handleRename: (prevName: string, newName: string) => void;
-    handleSelect: Dispatch<SetStateAction<string>>;
+    handleSelect: (title: string) => void;
 }
 export default function SidebarNote({
     title,
