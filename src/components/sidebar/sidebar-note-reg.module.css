@@ -13,18 +13,18 @@
     background: var(--col-note-sel);
 }
 
-.sidebarNote > p, .sidebarNote > input {
+.sidebarNote > p, .sidebarNoteSel > p, .sidebarNote > input, .sidebarNoteSel > input {
     width: 80%;
 }
 
-.sidebarNote > p {
+.sidebarNote > p, .sidebarNoteSel > p {
     line-height: var(--sb-note-height);
     overflow-x: hidden; 
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-.sidebarNote > input {
+.sidebarNote > input, .sidebarNoteSel > input {
     font: inherit;
     background: var(--col-text-edit);
     outline: 2px dashed var(--foreground);
@@ -49,11 +49,11 @@
     height: auto;
 }
 
-.sidebarNote:hover img {
+.sidebarNote:hover img, .sidebarNoteSel:hover img {
     filter: invert(1) contrast(1);
 }
 
-.sidebarNote img:hover {
+.sidebarNote img:hover, .sidebarNoteSel img:hover {
     filter: invert(1) contrast(1) drop-shadow(0 0 0.3rem var(--col-err));
     cursor: pointer;
 }

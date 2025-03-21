@@ -70,6 +70,7 @@ export default function Sidebar({
                 let prevNotes = [...notes];
                 prevNotes[index] = newName;
                 setNotes([...prevNotes]);
+                setCurNote(newName);
             }
         }
         

@@ -39,7 +39,7 @@ export default function SidebarNoteMin({
 
     return (
         <>
-        <div className={selected ? styles.sidbarNoteMinSel : styles.sidebarNoteMin}
+        <div className={selected ? styles.sidebarNoteMinSel : styles.sidebarNoteMin}
         onMouseOver={() => setHovered(true)}
         onMouseOut={() => setHovered(false)}
         onClick={() => handleSelect(title)}
