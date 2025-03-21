@@ -76,7 +76,13 @@ export const login = async (previousState: unknown, formData: FormData) => {
 }
 
 export const logout = async () => {
+    try {
+        (await cookies()).delete('token');
+    } catch(err) {
+        console.error(err);
+    }
 
+    redirect('/login'); 
 }
 
 

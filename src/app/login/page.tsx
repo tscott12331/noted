@@ -32,7 +32,7 @@ export default function Page() {
                     type="password" 
                     required
                     />
-                    <FormButton text="Create" error={data?.error}/>
+                    <FormButton text="Log in" error={data?.error}/>
                 </div>
                 <div className={styles.formFoot}>
                     <Link href="/register">Don't have an account?</Link>

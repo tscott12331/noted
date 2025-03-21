@@ -5,7 +5,8 @@ import SidebarControls from './sidebar-controls';
 import SidebarNote from './sidebar-note';
 import SidebarAdd from './sidebar-add';
 
-import { addNote, changeNote, deleteNote, getNotes } from '@/lib/api/notes';
+import { addNote, changeNote, deleteNote } from '@/lib/api/notes';
+import { logout } from '@/lib/auth';
 
 import styles from './sidebar.module.css';
 
@@ -123,6 +124,14 @@ export default function Sidebar({
                         handleSelect={handleSelect}
                         />
                     )}
+                </div>
+                <div className={styles.logoutWrapper}
+                onClick={logout}
+                >
+                    <img 
+                    alt="Log out"
+                    src="/logout.png"
+                    />
                 </div>
             </div>
     )

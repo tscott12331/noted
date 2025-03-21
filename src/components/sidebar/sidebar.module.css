@@ -1,5 +1,7 @@
 .sidebar {
     width: 20%;
+    height: 100vh;
+    --logout-but-size: 2rem;
 }
 
 .notesWrapperMin, .notesWrapperReg {
@@ -8,15 +10,16 @@
 }
 
 .notesWrapperMin {
-    height: calc(100% - var(--sb-con-height) - var(--sb-note-height));
+    height: calc(100% - var(--sb-con-height) - var(--sb-note-height) - var(--logout-but-size));
 }
  
 .notesWrapperReg {
-    height: calc(100% - var(--sb-con-height));
+    height: calc(100% - var(--sb-con-height) - var(--logout-but-size));
 }
 
 .min {
     width: 2rem;
+    --logout-but-size: 2rem;
 }
 
 .sidebar, .min {
@@ -32,4 +35,25 @@
     align-items: center;
 
     border-bottom: 1px solid var(--middleground);
+}
+
+.logoutWrapper {
+    height: var(--logout-but-size);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0.2rem;
+    border-top: 1px solid var(--foreground);
+}
+
+.logoutWrapper img {
+    aspect-ratio: 1 / 1;
+    max-height: 90%;
+    filter: invert(1);
+
+    cursor: pointer;
+}
+
+.logoutWrapper img:hover {
+    filter: invert(0.8);
 }
