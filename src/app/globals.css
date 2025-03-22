@@ -9,8 +9,6 @@
     --col-err: #ca4344;
     --col-but-hov: #cccccc;
 
-    --col-note-sel: #444444;
-
     --sb-con-height: 2rem;
     --sb-note-height: 2rem;
 }
@@ -24,7 +22,7 @@
 @media (prefers-color-scheme: dark) {
     :root {
         --background: #0a0a0a;
-        --foreground: #ededed;
+        --foreground: #babaca;
         --middleground: #9f9f9f;
         --col-text: var(--foreground);
         --col-but-hov: #3a3a3a;

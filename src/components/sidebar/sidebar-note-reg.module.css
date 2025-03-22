@@ -2,15 +2,29 @@
     justify-content: space-between;
     width: 100%;
     height: var(--sb-note-height);
-    border-bottom: 1px solid var(--middleground);
+    /*border-bottom: 1px solid var(--sidebar-light-border);*/
     display: flex;
     align-items: center;
     padding: .2rem;
     user-select: none;
+
+    border-radius: var(--note-radius);
+}
+
+.sidebarNote:nth-child(odd) {
+    background: var(--note-col);
+}
+
+.sidebarNote:nth-child(even) {
+    background: var(--note-col-even);
+}
+
+.sidebarNote:hover {
+    background: var(--note-col-hov);
 }
 
 .sidebarNoteSel {
-    background: var(--col-note-sel);
+    background: var(--note-col-sel);
 }
 
 .sidebarNote > p, .sidebarNoteSel > p, .sidebarNote > input, .sidebarNoteSel > input {
@@ -27,7 +41,7 @@
 .sidebarNote > input, .sidebarNoteSel > input {
     font: inherit;
     background: var(--col-text-edit);
-    outline: 2px dashed var(--foreground);
+    outline: 2px dashed var(--sidebar-strong-border);
     border: none;
 }
 

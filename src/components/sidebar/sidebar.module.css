@@ -1,12 +1,12 @@
 .sidebar {
     width: 20%;
     height: 100vh;
-    --logout-but-size: 2rem;
 }
 
 .notesWrapperMin, .notesWrapperReg {
     overflow: overlay;
     overflow-x: hidden;
+    background: var(--notes-wrapper-col);
 }
 
 .notesWrapperMin {
@@ -19,11 +19,24 @@
 
 .min {
     width: 2rem;
-    --logout-but-size: 2rem;
 }
 
 .sidebar, .min {
-    border-right: 1px solid var(--foreground);
+
+    --logout-but-size: 2rem;
+    --notes-wrapper-col: #111114;
+    --controls-wrapper-col: #0f0f13;
+    --note-col: #17171a;
+    --note-col-even: #101012;
+    --note-col-sel: #3f3f4a;
+    --note-col-hov: #23272b;
+
+    --sidebar-strong-border: #8c8c8f;
+    --sidebar-light-border: #666676;
+
+    --note-radius: 5px;
+
+    border-right: 2px solid var(--sidebar-strong-border);
 }
 
 .minAddWrapper {
@@ -34,7 +47,7 @@
     justify-content: center;
     align-items: center;
 
-    border-bottom: 1px solid var(--middleground);
+    border-bottom: 2px solid var(--sidebar-strong-border);
 }
 
 .logoutWrapper {
@@ -43,7 +56,8 @@
     display: flex;
     align-items: center;
     padding: 0.2rem;
-    border-top: 1px solid var(--foreground);
+    border-top: 2px solid var(--sidebar-strong-border);
+    background: var(--controls-wrapper-col);
 }
 
 .logoutWrapper img {

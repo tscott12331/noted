@@ -6,14 +6,16 @@
 
     align-items: center;
 
-    border-bottom: 1px solid var(--foreground);
+    background: var(--controls-wrapper-col);
 }
 
 .sidebarControlsReg {
     gap: .2rem;
+    border-bottom: 2px solid var(--sidebar-strong-border);
 }
 
 .sidebarControlsMin {
     padding: 0 .2rem;
     justify-content: center;
+    border-bottom: 1px solid var(--sidebar-light-border);
 }

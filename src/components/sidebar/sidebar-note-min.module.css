@@ -3,17 +3,32 @@
     position: relative;
     width: 100%;
     height: var(--sb-note-height);
-    border-bottom: 1px solid var(--middleground);
+    /*border-bottom: 1px solid var(--sidebar-light-border);*/
     display: flex;
     align-items: center;
     padding: .2rem;
     user-select: none;
 
     font-size: .7rem;
+
+    border-radius: var(--note-radius);
+}
+
+.sidebarNoteMin:nth-child(even) {
+    background: var(--note-col-even);
+}
+
+.sidebarNoteMin:nth-child(odd) {
+
+    background: var(--note-col);
+}
+
+.sidebarNoteMin:hover {
+    background: var(--note-col-hov);
 }
 
 .sidebarNoteMinSel {
-    background: var(--col-note-sel);
+    background: var(--note-col-sel);
 }
 
 .renamePopupWrapper {
@@ -26,7 +41,7 @@
     position: relative;
     top: calc(-1 * var(--sb-note-height) + .3rem);
     font-size: .7rem;
-    outline: 2px dashed var(--foreground);
+    outline: 2px dashed var(--sidebar-strong-border);
     border: none;
     background: var(--col-text-edit);
     color: inherit;

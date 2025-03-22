@@ -25,6 +25,7 @@ export default function Page() {
 
 
     useEffect(() => {
+        console.log(prevNote, curNote);
         if(hasChanges) {
             saveNote(prevNote, curBuff);
         }
