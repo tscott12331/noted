@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, DragEventHandler, SetStateAction, useEffect, useState } from 'react';
 import Cookies from 'js-cookie'
 
 import SidebarControls from './sidebar-controls';
@@ -27,7 +27,13 @@ export default function Sidebar({
     setCurNote,
     setPrevNote,
 }: SidebarProps) {
+    const MAX_SB_WID = 316;
+    const MIN_SB_WID = 32;
+    const SB_SWITCH_THRES = 60;
+
     const [minimized, setMinimized] = useState<boolean>(false);
+    const [sidebarWidth, setSidebarWidth] = useState<number>(158);
+
 
     const handleAdd = async () => {
         let token = Cookies.get('token');
@@ -99,6 +105,22 @@ export default function Sidebar({
         setCurNote(title);
     }
 
+    const handleDrag = (e: React.DragEvent<HTMLDivElement>)=> {
+        if(e.type === "drag" && minimized) setMinimized(false);
+
+        let newWidth = e.clientX;
+        if(newWidth > MAX_SB_WID) newWidth = MAX_SB_WID;
+        if(newWidth < SB_SWITCH_THRES) {
+            //newWidth = MIN_SB_WID;
+            newWidth = SB_SWITCH_THRES;
+            setMinimized(true);
+        } else {
+            setMinimized(false);
+        }
+
+        setSidebarWidth(newWidth);
+    }
+
     return (
             <div className={minimized ? styles.min : styles.sidebar}>
                 <SidebarControls 
@@ -112,7 +134,12 @@ export default function Sidebar({
                 </div>
                 } 
                 <div className={minimized ? styles.notesWrapperMin
-                    : styles.notesWrapperReg}>
+                    : styles.notesWrapperReg}
+                    style={
+                        { width: minimized ? 
+                                `${MIN_SB_WID}px` :
+                                `${sidebarWidth}px`}}
+                    >
                     {notes.map((note, i) => 
                         <SidebarNote 
                         handleRemove={handleRemove}
@@ -133,6 +160,12 @@ export default function Sidebar({
                     src="/logout.png"
                     />
                 </div>
+                <div 
+                onDrag={handleDrag}
+                onDragEnd={handleDrag}
+                className={styles.resizer}
+                draggable={true}
+                ></div>
             </div>
     )
 }

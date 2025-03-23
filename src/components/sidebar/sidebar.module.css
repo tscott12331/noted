@@ -1,6 +1,14 @@
 .sidebar {
-    width: 20%;
     height: 100vh;
+}
+
+.resizer {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    height: 100%;
+    width: 6px;
+    cursor: col-resize;
 }
 
 .notesWrapperMin, .notesWrapperReg {
@@ -11,6 +19,7 @@
 
 .notesWrapperMin {
     height: calc(100% - var(--sb-con-height) - var(--sb-note-height) - var(--logout-but-size));
+    border-right: 2px solid var(--sidebar-strong-border);
 }
  
 .notesWrapperReg {
@@ -37,6 +46,7 @@
     --note-radius: 5px;
 
     border-right: 2px solid var(--sidebar-strong-border);
+    position: relative;
 }
 
 .minAddWrapper {
@@ -58,6 +68,8 @@
     padding: 0.2rem;
     border-top: 2px solid var(--sidebar-strong-border);
     background: var(--controls-wrapper-col);
+
+    user-select: none;
 }
 
 .logoutWrapper img {
