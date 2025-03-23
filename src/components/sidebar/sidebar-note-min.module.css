@@ -16,19 +16,32 @@
 
 .sidebarNoteMin:nth-child(even) {
     background: var(--note-col-even);
+    transition: background;
+    transition-duration: .2s;
 }
 
 .sidebarNoteMin:nth-child(odd) {
-
     background: var(--note-col);
+    transition: background;
+    transition-duration: .2s;
+}
+
+@keyframes note-hover {
+    to {
+        background: var(--note-col-hov);
+    }
 }
 
 .sidebarNoteMin:hover {
     background: var(--note-col-hov);
+    transition: background;
+    transition-duration: .4s;
 }
 
 .sidebarNoteMinSel {
     background: var(--note-col-sel);
+    transition: background;
+    transition-duration: .2s;
 }
 
 .renamePopupWrapper {
@@ -59,4 +72,16 @@
     cursor: pointer;
     font-size: 6px;
     /*line-height: 7px;*/
+
+    transition: color font-size right;
+    transition-duration: .1s;
+}
+
+.delSymbolMin:hover {
+    color: var(--col-err-2);
+    transition: color font-size right;
+    transition-duration: .1s;
+
+    font-size: 8px;
+    right: .3rem;
 }

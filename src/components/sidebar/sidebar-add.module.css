@@ -1,10 +1,17 @@
 .sidebarAdd {
     width: calc(.75 * var(--sb-con-height));
     height: calc(.75 * var(--sb-con-height));
+    color: inherit;
+
+    transition: color;
+    transition-duration: .2s;
 }
 
 .sidebarAdd:hover {
     color: var(--col-but-hov);
+
+    transition: color;
+    transition-duration: .2s;
 }
 
 .sidebarAdd p {

@@ -2,7 +2,7 @@
     width: 100%;
     height: var(--sb-con-height);
     display: flex;
-    padding: 0 .25rem;
+    padding: 0 .2rem;
 
     align-items: center;
 
@@ -17,5 +17,6 @@
 .sidebarControlsMin {
     padding: 0 .2rem;
     justify-content: center;
-    border-bottom: 1px solid var(--sidebar-light-border);
+    /*border-bottom: 2px solid var(--sidebar-light-border);*/
+    border-bottom: 2px solid transparent;
 }

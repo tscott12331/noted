@@ -13,18 +13,26 @@
 
 .sidebarNote:nth-child(odd) {
     background: var(--note-col);
+    transition: background;
+    transition-duration: .2s;
 }
 
 .sidebarNote:nth-child(even) {
     background: var(--note-col-even);
+    transition: background;
+    transition-duration: .2s;
 }
 
 .sidebarNote:hover {
     background: var(--note-col-hov);
+    transition: background;
+    transition-duration: .2s;
 }
 
 .sidebarNoteSel {
     background: var(--note-col-sel);
+    transition: background;
+    transition-duration: .2s;
 }
 
 .sidebarNote > p, .sidebarNoteSel > p, .sidebarNote > input, .sidebarNoteSel > input {
@@ -61,13 +69,21 @@
     max-width: 95%;
     width: auto;
     height: auto;
+
+    transition: filter;
+    transition-duration: .4s;
 }
 
 .sidebarNote:hover img, .sidebarNoteSel:hover img {
     filter: invert(1) contrast(1);
+    transition: filter;
+    transition-duration: .4s;
 }
 
 .sidebarNote img:hover, .sidebarNoteSel img:hover {
     filter: invert(1) contrast(1) drop-shadow(0 0 0.3rem var(--col-err));
+    transition: filter;
+    transition-duration: .4s;
+
     cursor: pointer;
 }

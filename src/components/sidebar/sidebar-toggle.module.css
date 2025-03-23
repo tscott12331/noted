@@ -5,10 +5,16 @@
     user-select: none;
     border: 1px solid transparent;
     border-radius: 5px;
+
+    transition: border;
+    transition-duration: .2s;
 }
 
 .sidebarToggle:hover {
     border: 1px solid var(--col-but-hov);
+
+    transition: border;
+    transition-duration: .2s;
 }
 
 .sidebarToggle:hover img {

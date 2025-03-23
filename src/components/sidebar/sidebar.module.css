@@ -58,6 +58,8 @@
     align-items: center;
 
     border-bottom: 2px solid var(--sidebar-strong-border);
+
+    background: var(--controls-wrapper-col);
 }
 
 .logoutWrapper {
@@ -65,7 +67,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 0.2rem;
+    padding: 0.25rem;
     border-top: 2px solid var(--sidebar-strong-border);
     background: var(--controls-wrapper-col);
 
@@ -74,12 +76,19 @@
 
 .logoutWrapper img {
     aspect-ratio: 1 / 1;
-    max-height: 90%;
     filter: invert(1);
+    width: calc(.75 * var(--sb-con-height));
+    height: calc(.75 * var(--sb-con-height));
 
     cursor: pointer;
+
+    transition: filter;
+    transition-duration: .2s;
 }
 
 .logoutWrapper img:hover {
     filter: invert(0.8);
+
+    transition: filter;
+    transition-duration: .2s;
 }
