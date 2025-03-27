@@ -11,13 +11,13 @@ Add these local variables to a .env
 Feel free to change these to your liking
 
 Install Dependencies
-`bun i`
+`bun i`shell
 
 Make sure the docker container is running
-`bun docker:up`
+`bun docker:up`shell
 
 Migrate DB
-`bun drizzle-kit migrate`
+`bun drizzle-kit migrate`shell
 
 ## Run the Application
-`bun dev`
+`bun dev`shell
