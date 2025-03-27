@@ -18,6 +18,7 @@ export default function Page() {
     const [curNote, setCurNote] = useState<string>("");
     const [prevNote, setPrevNote] = useState<string>("");
     const [hasChanges, setHasChanges] = useState<boolean>(false);
+    const [isRenaming, setIsRenaming] = useState<boolean>(false);
     
     useEffect(() => {
         initSidebar(); 
@@ -26,7 +27,12 @@ export default function Page() {
 
     useEffect(() => {
         console.log(prevNote, curNote);
-        if(hasChanges) {
+        if(isRenaming) {
+            setIsRenaming(false);
+            if(hasChanges) {
+                saveNote(curNote, curBuff); 
+            }
+        } else if(hasChanges) {
             saveNote(prevNote, curBuff);
         }
         setHasChanges(false);
@@ -95,6 +101,7 @@ export default function Page() {
             prevNote={prevNote}
             setCurNote={setCurNote} 
             setPrevNote={setPrevNote}
+            setIsRenaming={setIsRenaming}
             />
             <NoteArea 
             curBuff={curBuff}

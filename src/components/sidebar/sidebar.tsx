@@ -17,6 +17,7 @@ export interface SidebarProps {
     prevNote: string;
     setCurNote: Dispatch<SetStateAction<string>> 
     setPrevNote: Dispatch<SetStateAction<string>> 
+    setIsRenaming: Dispatch<SetStateAction<boolean>> 
 }
 
 export default function Sidebar({
@@ -26,6 +27,7 @@ export default function Sidebar({
     prevNote,
     setCurNote,
     setPrevNote,
+    setIsRenaming,
 }: SidebarProps) {
     const MAX_SB_WID = 316;
     const MIN_SB_WID = 32;
@@ -87,6 +89,7 @@ export default function Sidebar({
         if(index !== -1 && !taken) {
             const changed = await changeNote(prevName, newName, token);
             if(changed) {
+                setIsRenaming(true);
                 let prevNotes = [...notes];
                 prevNotes[index] = newName;
                 setNotes([...prevNotes]);
