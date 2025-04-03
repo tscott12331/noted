@@ -1,5 +1,7 @@
 "use server";
 
+import { validateNoteTitle } from "../validation/notes";
+
 const API_URL: string = process.env.URL as string;
 
 import { verifyJWT } from "../jwt";
@@ -90,9 +92,14 @@ export async function updateNoteBuffer(title: string, buffer: string, token: str
 }
 
 export async function addNote(title: string, token: string) {
+    if(!validateNoteTitle(title)) {
+        console.log('invalid note title');
+        return;
+    }
+
     try {
         const user = await verifyJWT(token);
-        if(!user || !title) {
+        if(!user) {
             return;
         }
 
@@ -116,8 +123,10 @@ export async function addNote(title: string, token: string) {
 
 
 export async function changeNote(prevTitle: string, newTitle: string, token: string): Promise<boolean> {
+    if(!validateNoteTitle(newTitle)) return false;
+
     const user = await verifyJWT(token);
-    if(!user || !newTitle || !prevTitle) {
+    if(!user || !prevTitle) {
         return false;
     }
 
