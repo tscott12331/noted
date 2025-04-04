@@ -6,7 +6,7 @@ export interface SidebarNoteProps {
     minimized: boolean;
     selected: boolean;
     handleRemove: (title: string) => void;
-    handleRename: (prevName: string, newName: string) => void;
+    handleRename: (prevName: string, newName: string) => Promise<void>;
     handleSelect: (title: string) => void;
 }
 export default function SidebarNote({

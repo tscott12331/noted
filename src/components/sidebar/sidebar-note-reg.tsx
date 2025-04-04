@@ -5,7 +5,7 @@ import Image from 'next/image';
 export interface SidebarNoteRegProps {
     title: string;
     handleRemove: (title: string) => void;
-    handleRename: (prevName: string, newName: string) => void;
+    handleRename: (prevName: string, newName: string) => Promise<void>;
     selected: boolean;
     handleSelect: (title: string) => void;
 }
@@ -29,10 +29,10 @@ export default function SidebarNoteReg({
         setRenaming(true);
     }
 
-    const handleKeyDown = (e) => { 
+    const handleKeyDown = async (e) => { 
         if(e.key === "Enter" && renameInput?.current) {
+            await handleRename(title, renameInput.current.value);
             renameInput.current.blur();
-            handleRename(title, renameInput.current.value);
         }
     }
 

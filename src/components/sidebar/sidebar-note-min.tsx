@@ -4,7 +4,7 @@ import styles from './sidebar-note-min.module.css';
 export interface SidebarNoteMinProps {
     title: string;
     handleRemove: (title: string) => void;
-    handleRename: (prevName: string, newName: string) => void;
+    handleRename: (prevName: string, newName: string) => Promise<void>;
     selected: boolean;
     handleSelect: (title: string) => void;
 }
@@ -30,10 +30,10 @@ export default function SidebarNoteMin({
         setRenaming(true);
     }
 
-    const handleKeyDown = (e) => { 
+    const handleKeyDown = async (e) => { 
         if(e.key === "Enter" && renameInput?.current) {
+            await handleRename(title, renameInput.current.value);
             renameInput.current.blur();
-            handleRename(title, renameInput.current.value);
         }
     }
 
