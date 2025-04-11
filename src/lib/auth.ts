@@ -3,11 +3,15 @@
 import bcrypt from 'bcrypt';
 import { createSignedJWT } from './jwt';
 import { cookies } from 'next/headers';
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 import { db } from './db/db';
 import { users } from './db/schemas/users';
+import { refreshTokens } from './db/schemas/refresh-tokens';
 import { validateUsername, validatePassword } from './validation';
 import { redirect } from 'next/navigation';
+import { timestamp } from 'drizzle-orm/pg-core';
+
+const REFRESH_TOKEN_EXP_OFFSET = 15778476000;
 
 export const register = async (previousState: unknown, formData: FormData) => {
     const username: string = formData.get('username') as string;
@@ -31,9 +35,20 @@ export const register = async (previousState: unknown, formData: FormData) => {
             hw
         });
 
-        const token = await createSignedJWT(username);
+        const token: string = await createSignedJWT(username);
+        const refreshToken: string = crypto.randomUUID();
         
+        const newDate = new Date(Date.now() + REFRESH_TOKEN_EXP_OFFSET);
+
+        await db.insert(refreshTokens).values({
+            token: refreshToken,
+            username: username,
+            expiresAt: sql`to_timestamp(${newDate.getTime()} / 1000.0)`
+        });
+
+         
         (await cookies()).set('token', token);
+        (await cookies()).set('refresh-token', refreshToken);
 
     } catch(err) {
         console.error(err);
@@ -65,8 +80,21 @@ export const login = async (previousState: unknown, formData: FormData) => {
         if(!match) return { error: "Invalid credentials" };
 
         const token = await createSignedJWT(user.username);
+        const refreshToken: string = crypto.randomUUID();
+        
+        const newDate = new Date(Date.now() + REFRESH_TOKEN_EXP_OFFSET);
+
+        await db.delete(refreshTokens)
+                .where(eq(refreshTokens.username, username));
+
+        await db.insert(refreshTokens).values({
+            token: refreshToken,
+            username: username,
+            expiresAt: sql`to_timestamp(${newDate.getTime()} / 1000.0)`
+        });
 
         (await cookies()).set('token', token);
+        (await cookies()).set('refresh-token', refreshToken);
     } catch(err) {
         console.error(err);
         return { error: "Server error" };
@@ -78,6 +106,7 @@ export const login = async (previousState: unknown, formData: FormData) => {
 export const logout = async () => {
     try {
         (await cookies()).delete('token');
+        (await cookies()).delete('refresh-token');
     } catch(err) {
         console.error(err);
     }
