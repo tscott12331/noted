@@ -9,9 +9,34 @@ import { users } from './db/schemas/users';
 import { refreshTokens } from './db/schemas/refresh-tokens';
 import { validateUsername, validatePassword } from './validation';
 import { redirect } from 'next/navigation';
-import { timestamp } from 'drizzle-orm/pg-core';
 
 const REFRESH_TOKEN_EXP_OFFSET = 15778476000;
+const API_URL: string = process.env.URL as string;
+
+export const refresh = async (expJWT: string, refToken: string): Promise<string|boolean> => {
+    if(!expJWT || !refToken) return false;
+
+    try {
+        const res = await fetch(`${API_URL}/api/refresh`, {
+            method: "POST",
+            body: JSON.stringify({
+                refToken,
+                expJWT
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+
+        const resObj = await res.json();
+        if(resObj.error || !resObj.success) return false;
+
+        return resObj.jwt;
+    } catch(err) {
+        console.error(err);
+        return false;
+    }
+}
 
 export const register = async (previousState: unknown, formData: FormData) => {
     const username: string = formData.get('username') as string;
